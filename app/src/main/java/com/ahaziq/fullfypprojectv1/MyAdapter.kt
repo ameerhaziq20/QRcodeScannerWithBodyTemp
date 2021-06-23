@@ -21,9 +21,9 @@ class MyAdapter(private val userList : ArrayList<User>) : RecyclerView.Adapter<M
         //getting dad
         val currentitem = userList[position]
         //data from User data class
-        holder.firstName.text = currentitem.firstName
-        holder.lastName.text = currentitem.lastName
-        holder.age.text = currentitem.age
+        holder.firstName.text = currentitem.matricNumber
+        holder.lastName.text = currentitem.bodyTemp
+
 
     }
     //return total number of data held by adapter
@@ -36,7 +36,6 @@ class MyAdapter(private val userList : ArrayList<User>) : RecyclerView.Adapter<M
         //creates view, a base class for widgets.
         val firstName : TextView = itemView.findViewById(R.id.tvfirstName)
         val lastName : TextView = itemView.findViewById(R.id.tvlastName)
-        val age : TextView = itemView.findViewById(R.id.tvage)
 
     }
 

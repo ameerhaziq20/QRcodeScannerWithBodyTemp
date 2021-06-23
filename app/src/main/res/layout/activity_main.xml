@@ -16,39 +16,54 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="0dp"
+
+                android:layout_height="wrap_content"
+                android:text="QR Attendance + Temperature Scanner"
+                android:textSize="22dp"
+
+                app:layout_constraintBottom_toTopOf="@+id/ibtnListAct"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
+
             <ImageButton
-                android:id="@+id/imageButton6"
+                android:id="@+id/ibtnListAct"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:focusable="false"
                 android:scaleType="centerCrop"
-                app:layout_constraintStart_toStartOf="parent"
 
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/ibtnbtAct"
+                app:layout_constraintStart_toStartOf="@+id/textView"
+                app:layout_constraintTop_toBottomOf="@+id/textView"
                 app:srcCompat="@drawable/elbowbump" />
 
             <ImageButton
-                android:id="@+id/imageButton7"
+                android:id="@+id/ibtnbtAct"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/imageButton6"
-                app:layout_constraintTop_toBottomOf="@+id/imageButton6"
+                app:layout_constraintBottom_toTopOf="@+id/ibtnScanAct"
+                app:layout_constraintStart_toStartOf="@+id/ibtnListAct"
+                app:layout_constraintTop_toBottomOf="@+id/ibtnListAct"
                 app:srcCompat="@drawable/sars" />
 
             <ImageButton
-                android:id="@+id/imageButton8"
+                android:id="@+id/ibtnScanAct"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:focusable="false"
                 android:scaleType="centerCrop"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageButton7"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/ibtnbtAct"
+                app:layout_constraintTop_toBottomOf="@+id/ibtnbtAct"
                 app:srcCompat="@drawable/qr" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>

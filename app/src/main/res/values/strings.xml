@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">FullFypProjectV1</string>
+
+
+
+    <string name="scaninstruction">
+        Instructions:<br/>
+        1. Scan The QR code<br/>
+        2. After successful scan, wait for body temperature prompt.<br/>
+        3. Wait for app to receive body temperature from device
+        4. Finish
+    </string>
+
+
 </resources>
