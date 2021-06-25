@@ -47,7 +47,7 @@ class SelectDeviceActivity : AppCompatActivity() {
         if (!m_pairedDevices.isEmpty()) {
             for (device: BluetoothDevice in m_pairedDevices) {
                 list.add(device)
-                Log.i("device", ""+device)
+                Log.i("device", ""+device.name)
             }
         } else {
             Toast.makeText(applicationContext,"No Paired Devices Available",Toast.LENGTH_SHORT).show()
@@ -61,6 +61,7 @@ class SelectDeviceActivity : AppCompatActivity() {
 
             val intent = Intent(this, ControlActivity::class.java)
             intent.putExtra(EXTRA_ADDRESS, address)
+            Toast.makeText(applicationContext, "Connected to Temperature Scanner", Toast.LENGTH_SHORT).show()
             startActivity(intent)
         }
     }

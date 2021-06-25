@@ -27,10 +27,8 @@ class UserlistActivity : AppCompatActivity() {
     }
     //fetch user data from the firebase realtime database
     private fun getUserData() {
-        //give the database an offline capability.
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true)
         //points to a location in the database, in this case, the "Users" child.
-        dbref = FirebaseDatabase.getInstance().getReference("Users")
+        dbref = FirebaseDatabase.getInstance().reference
         //listener during event changes.
         dbref.addValueEventListener(object : ValueEventListener{
             //called when the data changes

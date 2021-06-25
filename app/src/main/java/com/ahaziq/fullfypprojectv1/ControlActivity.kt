@@ -9,6 +9,7 @@ import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.google.zxing.client.android.Intents
 import kotlinx.android.synthetic.main.control_layout.*
 import java.io.*
 import java.nio.charset.Charset
@@ -17,7 +18,6 @@ import java.util.*
 class ControlActivity : AppCompatActivity() {
 
 
-    val sb = StringBuilder()
 
     companion object {
         var m_myUUID: UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
@@ -26,30 +26,32 @@ class ControlActivity : AppCompatActivity() {
         lateinit var m_bluetoothAdapter: BluetoothAdapter
         var m_isConnected: Boolean = false
         lateinit var m_address: String
+        val sb = StringBuilder()
+        lateinit var m_matricNumber:String
+
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.control_layout)
         m_address = intent.getStringExtra(SelectDeviceActivity.EXTRA_ADDRESS).toString()
-
+        m_matricNumber = intent.getStringExtra(ScanActivity.MATRIC_NUMBER_CURRENT).toString()
         ConnectToDevice(this).execute()
 
-        control_led_on.setOnClickListener { sendCommand("abc\n") }
-        control_led_off.setOnClickListener { sendCommand("b") }
-        control_led_disconnect.setOnClickListener { disconnect() }
 
-
-        recieve_data.setOnClickListener {
+        if (m_bluetoothSocket != null) {
+            sendCommand()
             receiveData()
         }
 
+
+
     }
 
-    private fun sendCommand(input: String) {
-
-        val mmBuffer: ByteArray = ByteArray(1024) // mmBuffer store for the stream
-
+    private fun sendCommand() {
+        //triggers the esp32
+        val input = "a"
         if (m_bluetoothSocket != null) {
             try {
                 m_bluetoothSocket!!.outputStream.write(input.toByteArray())
@@ -66,7 +68,7 @@ class ControlActivity : AppCompatActivity() {
 
         var readMessage : String = ""
 
-        val bluetoothSocketInputStream = m_bluetoothSocket!!.inputStream
+        m_bluetoothSocket!!.inputStream
         val buffer = ByteArray(1024)
         var bytes: Int
         //Loop to listen for received bluetooth messages
@@ -77,9 +79,12 @@ class ControlActivity : AppCompatActivity() {
                 bytes = m_bluetoothSocket!!.inputStream.read(buffer)
                 //convert to string
                 readMessage = readMessage + String(buffer, 0,bytes)
+                var body_temp = readMessage.trim()
+
+                ScanActivity.database.child(m_matricNumber).setValue(User(m_matricNumber,body_temp))
 
 
-                sb.append(readMessage)
+                sb.append(body_temp)
                 tv_grab.text=sb
 
             } catch (e: IOException) {
@@ -88,7 +93,6 @@ class ControlActivity : AppCompatActivity() {
             }
         }
     }
-
 
 
     private fun disconnect() {

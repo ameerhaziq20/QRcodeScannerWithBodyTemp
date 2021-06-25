@@ -1,5 +1,7 @@
 package com.ahaziq.fullfypprojectv1
 
+import android.bluetooth.BluetoothAdapter
+import android.bluetooth.BluetoothDevice
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -11,9 +13,16 @@ import com.google.firebase.database.ValueEventListener
 import com.google.zxing.integration.android.IntentIntegrator
 import kotlinx.android.synthetic.main.activity_scan.*
 
+
 const val TAG: String = "TAG"
 
 class ScanActivity : AppCompatActivity() {
+
+
+    companion object {
+        val MATRIC_NUMBER_CURRENT: String = "Current Matric Number"
+        var database = FirebaseDatabase.getInstance().reference
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,21 +48,25 @@ class ScanActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
-
-
-        var database = FirebaseDatabase.getInstance().reference
+        // var database = FirebaseDatabase.getInstance().reference
         var matric_no = result.contents.toString()
 
         database.child(matric_no).setValue(User(matric_no))
+        //pass the qr code value to the next activity (Control Activity)
+        val intent = Intent(this, ControlActivity::class.java)
+        intent.putExtra(MATRIC_NUMBER_CURRENT, matric_no)
+        startActivity(intent)
+
 
         var updateSuccess = object : ValueEventListener {
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                Toast.makeText(applicationContext,"Data saved to firebase",Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "Data saved to firebase", Toast.LENGTH_SHORT)
+                    .show()
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(applicationContext,"Data save error",Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "Data save error", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -68,4 +81,6 @@ class ScanActivity : AppCompatActivity() {
         database.addValueEventListener(updateSuccess)
         database.addListenerForSingleValueEvent(updateSuccess)
     }
+
+
 }
