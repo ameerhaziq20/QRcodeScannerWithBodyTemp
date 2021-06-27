@@ -37,24 +37,32 @@ class SelectDeviceRV : AppCompatActivity() {
         checkBluetoothSupport()
         postToList()
 
+
+
         rv_recyclerview.layoutManager = LinearLayoutManager(this)
         rv_recyclerview.adapter = BluetoothPairedAdapter(titlesList, descList)
     }
 
     private fun checkBluetoothSupport() {
         m_bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
-        if(m_bluetoothAdapter == null) {
-            Toast.makeText(applicationContext,"Bluetooth Not Supported", Toast.LENGTH_SHORT).show()
+        if (m_bluetoothAdapter == null) {
+            Toast.makeText(applicationContext, "Bluetooth Not Supported", Toast.LENGTH_SHORT).show()
             return
         }
-        if(!m_bluetoothAdapter!!.isEnabled) {
+        if (!m_bluetoothAdapter!!.isEnabled) {
             val enableBluetoothIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
             startActivityForResult(enableBluetoothIntent, REQUEST_ENABLE_BLUETOOTH)
         }
+        btn_refresh.setOnClickListener {
 
-        btn_refresh.setOnClickListener{ pairedDeviceList() }    }
+            postToList()
+            Toast.makeText(applicationContext, "Device List Updated", Toast.LENGTH_SHORT).show()
 
-    private fun pairedDeviceList() {
+        }
+
+    }
+
+/*    private fun pairedDeviceList() {
         m_pairedDevices = m_bluetoothAdapter!!.bondedDevices
         val list : ArrayList<BluetoothDevice> = ArrayList()
 
@@ -66,7 +74,7 @@ class SelectDeviceRV : AppCompatActivity() {
         } else {
             Toast.makeText(applicationContext,"No Paired Devices Available",Toast.LENGTH_SHORT).show()
         }
-    }
+    }*/
 
     private fun addToList(title: String, description: String) {
         titlesList.add(title)
@@ -77,9 +85,12 @@ class SelectDeviceRV : AppCompatActivity() {
     private fun postToList() {
         m_pairedDevices = m_bluetoothAdapter!!.bondedDevices
 
+
+
         for (device: BluetoothDevice in m_pairedDevices) {
             addToList(device.name, device.address)
-            Log.i("device", ""+device.name)
+            Log.i("device", "" + device.name)
+
 
         }
     }
@@ -89,12 +100,18 @@ class SelectDeviceRV : AppCompatActivity() {
         if (requestCode == REQUEST_ENABLE_BLUETOOTH) {
             if (resultCode == Activity.RESULT_OK) {
                 if (m_bluetoothAdapter!!.isEnabled) {
-                    Toast.makeText(applicationContext,"Bluetooth Enabled",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "Bluetooth Enabled", Toast.LENGTH_SHORT)
+                        .show()
                 } else {
-                    Toast.makeText(applicationContext,"Bluetooth Disabled",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "Bluetooth Disabled", Toast.LENGTH_SHORT)
+                        .show()
                 }
             } else if (resultCode == Activity.RESULT_CANCELED) {
-                Toast.makeText(applicationContext,"Canceled Bluetooth Enabling ",Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    applicationContext,
+                    "Canceled Bluetooth Enabling ",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }

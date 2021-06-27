@@ -1,72 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardElevation="8dp"
-    app:cardCornerRadius="8dp"
     android:layout_margin="5dp"
-    android:backgroundTint="@color/Space_Cadet_Darker">
+    android:backgroundTint="@color/Space_Cadet_Darker"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="8dp">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginVertical="6dp"
-        android:orientation="vertical">
+        android:layout_marginStart="16dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/common_google_signin_btn_icon_light"
+
+
+            android:contentDescription="TODO" />
+
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_marginVertical="6dp"
+            android:layout_marginStart="16dp"
+            android:orientation="vertical">
 
-            <TextView
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Matric Number: "
-                android:textColor="@color/Ghost_White"
-                android:textSize="20dp"
-                />
+                android:layout_gravity="center_vertical"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tvfirstName"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Matric Number: "
+                    android:textColor="@color/Ghost_White"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/tvfirstName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Arya"
+                    android:textColor="@color/Ghost_White"
+                    android:textSize="20dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="Arya"
-                android:textColor="@color/Ghost_White"
-                android:textSize="20dp"/>
+                android:layout_gravity="center_vertical"
+                android:orientation="horizontal">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Body Temperature: "
+                    android:textColor="@color/Ghost_White"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/tvlastName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Stark"
+                    android:textColor="@color/Ghost_White"
+                    android:textSize="20dp" />
+
+            </LinearLayout>
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Body Temperature: "
-                android:textColor="@color/Ghost_White"
-                android:textSize="20dp"/>
-
-            <TextView
-                android:id="@+id/tvlastName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="Stark"
-                android:textColor="@color/Ghost_White"
-                android:textSize="20dp"/>
-
-        </LinearLayout>
-
-
 
 
     </LinearLayout>
+
 
 </androidx.cardview.widget.CardView>

@@ -3,11 +3,11 @@
 
 
     <string name="scaninstruction">
-        Instructions:\n
-        1. Scan The QR\n
-        2. After successful scan, wait for body temperature prompt\n
-        3. Wait for app to receive body temperature from device\n
-        4. Finish \n
+        Instructions:\n\n
+        1. Scan The QR\n\n
+        2. After successful scan, wait for body temperature prompt\n\n
+        3. Wait for app to receive body temperature from device\n\n
+        4. Finish \n\n
     </string>
 
 

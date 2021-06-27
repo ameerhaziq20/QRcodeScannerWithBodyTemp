@@ -32,7 +32,7 @@
         android:layout_marginHorizontal="50dp"
         android:layout_marginTop="108dp"
         android:layout_marginBottom="156dp"
-        android:background="@color/Space_Cadet"
+        android:background="@color/Gunmetal"
         android:text="@string/scaninstruction"
         android:textAlignment="textStart"
         android:textColor="@color/Ghost_White"
