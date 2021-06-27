@@ -1,20 +1,26 @@
 package com.ahaziq.fullfypprojectv1
 
-
 import android.app.Activity
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.activity_bluetooth_pairing.*
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.select_device_layout.*
 
-class SelectDevice : AppCompatActivity() {
 
+class SelectDeviceRV : AppCompatActivity() {
+    private var titlesList = mutableListOf<String>()
+    private var descList = mutableListOf<String>()
+    private var imagesList = mutableListOf<Int>()
+
+    //for bluetooth part
     private var m_bluetoothAdapter: BluetoothAdapter? = null
     private lateinit var m_pairedDevices: Set<BluetoothDevice>
     private val REQUEST_ENABLE_BLUETOOTH = 1
@@ -23,9 +29,19 @@ class SelectDevice : AppCompatActivity() {
         val EXTRA_ADDRESS: String = "Device_address"
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.select_device_layout)
+        setContentView(R.layout.activity_bluetooth_pairing)
+
+        checkBluetoothSupport()
+        postToList()
+
+        rv_recyclerview.layoutManager = LinearLayoutManager(this)
+        rv_recyclerview.adapter = BluetoothPairedAdapter(titlesList, descList)
+    }
+
+    private fun checkBluetoothSupport() {
         m_bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
         if(m_bluetoothAdapter == null) {
             Toast.makeText(applicationContext,"Bluetooth Not Supported", Toast.LENGTH_SHORT).show()
@@ -36,9 +52,7 @@ class SelectDevice : AppCompatActivity() {
             startActivityForResult(enableBluetoothIntent, REQUEST_ENABLE_BLUETOOTH)
         }
 
-        select_device_refresh.setOnClickListener{ pairedDeviceList() }
-
-    }
+        btn_refresh.setOnClickListener{ pairedDeviceList() }    }
 
     private fun pairedDeviceList() {
         m_pairedDevices = m_bluetoothAdapter!!.bondedDevices
@@ -52,18 +66,21 @@ class SelectDevice : AppCompatActivity() {
         } else {
             Toast.makeText(applicationContext,"No Paired Devices Available",Toast.LENGTH_SHORT).show()
         }
+    }
 
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, list)
-        select_device_list.adapter = adapter
-        select_device_list.onItemClickListener = AdapterView.OnItemClickListener { _, name, position, _ ->
-            val device: BluetoothDevice = list[position]
-            val address: String = device.address
+    private fun addToList(title: String, description: String) {
+        titlesList.add(title)
+        descList.add(description)
 
-            //start control activity and send the data to Control activity
-            val intent = Intent(this, ControlActivity::class.java)
-            intent.putExtra(EXTRA_ADDRESS, address)
-            Toast.makeText(applicationContext, "Connected to Temperature Scanner", Toast.LENGTH_SHORT).show()
-            startActivity(intent)
+    }
+
+    private fun postToList() {
+        m_pairedDevices = m_bluetoothAdapter!!.bondedDevices
+
+        for (device: BluetoothDevice in m_pairedDevices) {
+            addToList(device.name, device.address)
+            Log.i("device", ""+device.name)
+
         }
     }
 

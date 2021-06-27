@@ -3,11 +3,11 @@
 
 
     <string name="scaninstruction">
-        Instructions:<br />
-        1. Scan The QR code<br />
-        2. After successful scan, wait for body temperature prompt.<br />
-        3. Wait for app to receive body temperature from device
-        4. Finish
+        Instructions:\n
+        1. Scan The QR\n
+        2. After successful scan, wait for body temperature prompt\n
+        3. Wait for app to receive body temperature from device\n
+        4. Finish \n
     </string>
 
 

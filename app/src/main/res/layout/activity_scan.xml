@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ScanActivity">
+    tools:context=".ScanActivity"
+    android:backgroundTint="@color/Space_Cadet_Darker">
 
     <Button
         android:id="@+id/btnScanButton"
@@ -15,15 +16,26 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        android:textAllCaps="false"
+
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        android:background="@drawable/custom_button"/>
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="229dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:paddingRight="50dp"
+        android:paddingLeft="50dp"
+        android:paddingVertical="50dp"
+        android:layout_height="wrap_content"
+
+        android:layout_marginHorizontal="50dp"
         android:layout_marginTop="108dp"
         android:layout_marginBottom="156dp"
+        android:background="@color/Space_Cadet"
         android:text="@string/scaninstruction"
+        android:textAlignment="textStart"
+        android:textColor="@color/Ghost_White"
         app:layout_constraintBottom_toTopOf="@+id/btnScanButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

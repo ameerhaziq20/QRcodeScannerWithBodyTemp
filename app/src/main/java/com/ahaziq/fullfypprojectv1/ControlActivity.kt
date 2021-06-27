@@ -9,10 +9,7 @@ import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.google.zxing.client.android.Intents
-import kotlinx.android.synthetic.main.control_layout.*
 import java.io.*
-import java.nio.charset.Charset
 import java.util.*
 
 class ControlActivity : AppCompatActivity() {
@@ -35,7 +32,7 @@ class ControlActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.control_layout)
-        m_address = intent.getStringExtra(SelectDeviceActivity.EXTRA_ADDRESS).toString()
+        m_address = intent.getStringExtra(SelectDevice.EXTRA_ADDRESS).toString()
         m_matricNumber = intent.getStringExtra(ScanActivity.MATRIC_NUMBER_CURRENT).toString()
         ConnectToDevice(this).execute()
 
@@ -83,9 +80,6 @@ class ControlActivity : AppCompatActivity() {
 
                 ScanActivity.database.child(m_matricNumber).setValue(User(m_matricNumber,body_temp))
 
-
-                sb.append(body_temp)
-                tv_grab.text=sb
 
             } catch (e: IOException) {
                 e.printStackTrace()

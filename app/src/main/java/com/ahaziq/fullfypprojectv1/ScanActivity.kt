@@ -1,7 +1,5 @@
 package com.ahaziq.fullfypprojectv1
 
-import android.bluetooth.BluetoothAdapter
-import android.bluetooth.BluetoothDevice
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast

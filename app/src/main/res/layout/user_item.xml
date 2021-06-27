@@ -5,7 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardElevation="8dp"
     app:cardCornerRadius="8dp"
-    android:layout_margin="5dp">
+    android:layout_margin="5dp"
+    android:backgroundTint="@color/Space_Cadet_Darker">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -24,9 +25,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Matric Number: "
-                android:textColor="@color/black"
-                android:textSize="26sp"
-                android:textStyle="bold"/>
+                android:textColor="@color/Ghost_White"
+                android:textSize="20dp"
+                />
 
             <TextView
                 android:id="@+id/tvfirstName"
@@ -34,8 +35,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="Arya"
-                android:textColor="@color/black"
-                android:textSize="20sp"/>
+                android:textColor="@color/Ghost_White"
+                android:textSize="20dp"/>
 
         </LinearLayout>
 
@@ -49,9 +50,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Body Temperature: "
-                android:textColor="@color/black"
-                android:textSize="25sp"
-                android:textStyle="bold"/>
+                android:textColor="@color/Ghost_White"
+                android:textSize="20dp"/>
 
             <TextView
                 android:id="@+id/tvlastName"
@@ -59,8 +59,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="Stark"
-                android:textColor="@color/black"
-                android:textSize="20sp"/>
+                android:textColor="@color/Ghost_White"
+                android:textSize="20dp"/>
 
         </LinearLayout>
 
