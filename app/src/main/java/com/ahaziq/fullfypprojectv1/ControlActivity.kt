@@ -5,15 +5,16 @@ import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothSocket
 import android.content.Context
+import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import java.io.*
 import java.util.*
 
 class ControlActivity : AppCompatActivity() {
-
 
 
     companion object {
@@ -24,7 +25,7 @@ class ControlActivity : AppCompatActivity() {
         var m_isConnected: Boolean = false
         lateinit var m_address: String
         val sb = StringBuilder()
-        lateinit var m_matricNumber:String
+        lateinit var m_matricNumber: String
 
 
     }
@@ -40,11 +41,21 @@ class ControlActivity : AppCompatActivity() {
         if (m_bluetoothSocket != null) {
             sendCommand()
             receiveData()
+        } else {
+
+            Toast.makeText(
+                applicationContext,
+                "Device Connected",
+                Toast.LENGTH_SHORT
+            ).show()
+
+//            val intent = Intent(this, MainActivity::class.java)
+//            startActivity(intent)
+
         }
 
-
-
     }
+
 
     private fun sendCommand() {
         //triggers the esp32
@@ -63,22 +74,23 @@ class ControlActivity : AppCompatActivity() {
     private fun receiveData() {
 
 
-        var readMessage : String = ""
+        var readMessage: String = ""
 
         m_bluetoothSocket!!.inputStream
         val buffer = ByteArray(1024)
         var bytes: Int
         //Loop to listen for received bluetooth messages
-        while (!(readMessage.contains('\n'))){
+        while (!(readMessage.contains('\n'))) {
 
             try {
                 //read bytes received and ins to buffer
                 bytes = m_bluetoothSocket!!.inputStream.read(buffer)
                 //convert to string
-                readMessage = readMessage + String(buffer, 0,bytes)
+                readMessage = readMessage + String(buffer, 0, bytes)
                 var body_temp = readMessage.trim()
 
-                ScanActivity.database.child(m_matricNumber).setValue(User(m_matricNumber,body_temp))
+                ScanActivity.database.child(m_matricNumber)
+                    .setValue(User(m_matricNumber, body_temp))
 
 
             } catch (e: IOException) {

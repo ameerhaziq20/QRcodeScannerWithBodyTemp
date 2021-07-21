@@ -55,26 +55,14 @@ class SelectDeviceRV : AppCompatActivity() {
         }
         btn_refresh.setOnClickListener {
 
-            postToList()
-            Toast.makeText(applicationContext, "Device List Updated", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "Updating List", Toast.LENGTH_SHORT).show()
+
+            val intent = Intent(this, SelectDeviceRV::class.java)
+            startActivity(intent)
 
         }
 
     }
-
-/*    private fun pairedDeviceList() {
-        m_pairedDevices = m_bluetoothAdapter!!.bondedDevices
-        val list : ArrayList<BluetoothDevice> = ArrayList()
-
-        if (!m_pairedDevices.isEmpty()) {
-            for (device: BluetoothDevice in m_pairedDevices) {
-                list.add(device)
-                Log.i("device", ""+device.name)
-            }
-        } else {
-            Toast.makeText(applicationContext,"No Paired Devices Available",Toast.LENGTH_SHORT).show()
-        }
-    }*/
 
     private fun addToList(title: String, description: String) {
         titlesList.add(title)
@@ -84,7 +72,6 @@ class SelectDeviceRV : AppCompatActivity() {
 
     private fun postToList() {
         m_pairedDevices = m_bluetoothAdapter!!.bondedDevices
-
 
 
         for (device: BluetoothDevice in m_pairedDevices) {

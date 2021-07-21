@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
     val m_bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -22,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         FirebaseDatabase.getInstance().setPersistenceEnabled(true)
+
 
         val listAct = findViewById<ImageButton>(R.id.ibtnListAct)
         listAct.setOnClickListener {
